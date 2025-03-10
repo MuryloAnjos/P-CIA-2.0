@@ -4,6 +4,7 @@ import Connection.ConnectionFactory;
 import Model.Cliente;
 import Model.Item_Venda;
 import Model.Produto;
+import Model.Venda;
 import static View.Caixa_GUI.Id_venda_txt;
 import static View.Caixa_GUI.item_table;
 import static View.Caixa_GUI.nomepdt_txt1;
@@ -127,10 +128,10 @@ public class Venda_DAO {
         try {
             stmt = con.prepareStatement(
                       "SELECT "
-                    + "pr.nome AS pdt_nome, "
+                    + "pr.prod_nome AS pdt_nome, "
                     + "pe.quantidade AS qtd_item, "
-                    + "pr.preco AS pdt_preco, "
-                    + "ven.id AS ven_id "
+                    + "pr.prod_preco AS pdt_preco, "
+                    + "ven.ven_id AS ven_id "
                     + "FROM item_venda pe "
                     + "JOIN produtos pr ON pe.pdt_id = pr.prod_id "
                     + "JOIN vendas ven ON pe.ven_id = ven.ven_id "
@@ -189,5 +190,34 @@ public class Venda_DAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
 
+    }
+    
+    public List<Venda> read1(){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt= null;
+        ResultSet rs = null;
+        
+        List<Venda> vendas = new ArrayList<>();
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM vendas");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                Venda ven = new Venda();
+                ven.setId(rs.getInt("ven_id"));
+                ven.setData(rs.getTimestamp("ven_data").toLocalDateTime());
+                ven.setMet_pagamento(rs.getString("ven_met_pagamento"));
+                ven.setValor_total(rs.getDouble("ven_valor_total"));
+                vendas.add(ven);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Venda_DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return vendas;
+        
     }
 }

@@ -116,7 +116,6 @@ public class Caixa_GUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         item_table = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
-        editar_BTN = new javax.swing.JButton();
         excluir_BTN = new javax.swing.JButton();
         add_BTN = new javax.swing.JButton();
         buscar_BTN = new javax.swing.JButton();
@@ -128,6 +127,7 @@ public class Caixa_GUI extends javax.swing.JFrame {
         buscar_txt6 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         buscar_txt7 = new javax.swing.JTextField();
+        editar_BTN1 = new javax.swing.JButton();
         barrinha = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -222,16 +222,6 @@ public class Caixa_GUI extends javax.swing.JFrame {
         jPanel1.add(jLabel12);
         jLabel12.setBounds(70, 80, 100, 40);
 
-        editar_BTN.setBackground(new java.awt.Color(37, 36, 36));
-        editar_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/editar (1).png"))); // NOI18N
-        editar_BTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editar_BTNActionPerformed(evt);
-            }
-        });
-        jPanel1.add(editar_BTN);
-        editar_BTN.setBounds(570, 210, 60, 50);
-
         excluir_BTN.setBackground(new java.awt.Color(37, 36, 36));
         excluir_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/excluir (2).png"))); // NOI18N
         jPanel1.add(excluir_BTN);
@@ -301,6 +291,16 @@ public class Caixa_GUI extends javax.swing.JFrame {
         jLabel5.setBounds(70, 200, 100, 40);
         jPanel1.add(buscar_txt7);
         buscar_txt7.setBounds(170, 210, 60, 30);
+
+        editar_BTN1.setBackground(new java.awt.Color(37, 36, 36));
+        editar_BTN1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/editar (1).png"))); // NOI18N
+        editar_BTN1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editar_BTN1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(editar_BTN1);
+        editar_BTN1.setBounds(570, 210, 60, 50);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 880, 500);
@@ -405,10 +405,6 @@ public class Caixa_GUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void editar_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_BTNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editar_BTNActionPerformed
-
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         new Inicio_GUI().setVisible(true);
@@ -503,6 +499,10 @@ public class Caixa_GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_limpar_BTN1ActionPerformed
 
+    private void editar_BTN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_BTN1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editar_BTN1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -546,7 +546,7 @@ public class Caixa_GUI extends javax.swing.JFrame {
     public static javax.swing.JTextField buscar_txt6;
     private javax.swing.JTextField buscar_txt7;
     private javax.swing.JLabel cpf_text;
-    private javax.swing.JButton editar_BTN;
+    private javax.swing.JButton editar_BTN1;
     private javax.swing.JButton excluir_BTN;
     private javax.swing.JButton finalizar_BTN;
     public static javax.swing.JTable item_table;

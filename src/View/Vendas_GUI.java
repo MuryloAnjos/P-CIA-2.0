@@ -5,21 +5,100 @@
  */
 package View;
 
+import Controller.Venda_DAO;
+import Model.Venda;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.MenuElement;
+import javax.swing.plaf.basic.BasicMenuBarUI;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author Kaua
  */
 public class Vendas_GUI extends javax.swing.JFrame {
+    
+    private void customizeMenuBar(JMenuBar menuBar) {
 
+        menuBar.setUI(new BasicMenuBarUI() {
+
+            @Override
+            public void paint(Graphics g, JComponent c) {
+                g.setColor(Color.black);
+                g.fillRect(0, 0, c.getWidth(), c.getHeight());
+            }
+
+        });
+
+        MenuElement[] menus = menuBar.getSubElements();
+
+        for (MenuElement menuElement : menus) {
+
+            JMenu menu = (JMenu) menuElement.getComponent();
+            changeComponentColors(menu);
+            menu.setOpaque(true);
+
+            MenuElement[] menuElements = menu.getSubElements();
+
+            for (MenuElement popupMenuElement : menuElements) {
+
+                JPopupMenu popupMenu = (JPopupMenu) popupMenuElement.getComponent();
+                popupMenu.setBorder(null);
+
+                MenuElement[] menuItens = popupMenuElement.getSubElements();
+
+                for (MenuElement menuItemElement : menuItens) {
+
+                    JMenuItem menuItem = (JMenuItem) menuItemElement.getComponent();
+                    changeComponentColors(menuItem);
+                    menuItem.setOpaque(true);
+
+                }
+            }
+        }
+    }
+
+    private void changeComponentColors(Component comp) {
+        comp.setBackground(Color.black);
+        comp.setForeground(Color.white);
+    }
     /**
      * Creates new form Vendas_GUI
      */
     public Vendas_GUI() {
         initComponents();
+        DefaultTableModel modelo = (DefaultTableModel) vendas_table.getModel();
+        vendas_table.setRowSorter(new TableRowSorter(modelo));
+        vendas_table.setAutoCreateRowSorter(false);
+        readJTable();
+        customizeMenuBar(barrinha);
+
     }
 
+     public void readJTable() {
+        DefaultTableModel modelo = (DefaultTableModel) vendas_table.getModel();
+        Venda_DAO ven = new Venda_DAO();
+
+        modelo.setNumRows(0);
+        for (Venda v : ven.read1()) {
+            modelo.addRow(new Object[]{
+                v.getId(),
+                v.getData(),
+                v.getMet_pagamento(),
+                v.getValor_total()
+            });
+           
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,21 +111,21 @@ public class Vendas_GUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        cpf_text = new javax.swing.JLabel();
         valortl_txt = new javax.swing.JTextField();
         id_compra_txt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        vendas_table = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         quant_text = new javax.swing.JLabel();
         produto_text = new javax.swing.JLabel();
         preco_text = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        nome_text = new javax.swing.JLabel();
         limpar_BTN = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        editar_BTN = new javax.swing.JButton();
+        cli_cpf_txt = new javax.swing.JLabel();
+        cli_nome_txt = new javax.swing.JLabel();
         barrinha = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -66,60 +145,56 @@ public class Vendas_GUI extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Valor Total");
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Valor Total :");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(50, 100, 90, 40);
+        jLabel5.setBounds(50, 150, 90, 30);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Dados do Cliente:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(560, 40, 160, 40);
-
-        cpf_text.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jPanel1.add(cpf_text);
-        cpf_text.setBounds(610, 140, 150, 30);
+        jLabel3.setBounds(580, 10, 160, 40);
         jPanel1.add(valortl_txt);
-        valortl_txt.setBounds(130, 100, 110, 30);
+        valortl_txt.setBounds(160, 150, 110, 30);
         jPanel1.add(id_compra_txt);
-        id_compra_txt.setBounds(140, 40, 60, 30);
+        id_compra_txt.setBounds(140, 80, 60, 30);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Nome");
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Nome :");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(560, 90, 50, 40);
+        jLabel7.setBounds(470, 80, 50, 40);
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("CPF");
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("CPF :");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(560, 130, 50, 40);
+        jLabel8.setBounds(470, 140, 40, 40);
 
-        jTable1.setBackground(new java.awt.Color(103, 103, 103));
-        jTable1.setForeground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        vendas_table.setBackground(new java.awt.Color(103, 103, 103));
+        vendas_table.setForeground(new java.awt.Color(255, 255, 255));
+        vendas_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "id_compra", "Nome", "Metodo_pagaento", "Produtos", "Quantidade"
+                "Id_Venda", "Data", "Método_Pagamento", "Valor_Total"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(vendas_table);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(0, 280, 880, 230);
+        jScrollPane1.setBounds(0, 250, 880, 250);
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("ID_compra");
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("ID_Compra :");
         jPanel1.add(jLabel12);
-        jLabel12.setBounds(50, 30, 100, 40);
+        jLabel12.setBounds(50, 70, 100, 50);
         jPanel1.add(quant_text);
         quant_text.setBounds(160, 220, 140, 30);
         jPanel1.add(produto_text);
@@ -129,23 +204,23 @@ public class Vendas_GUI extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa (1).png"))); // NOI18N
         jPanel1.add(jButton1);
-        jButton1.setBounds(210, 40, 50, 30);
-
-        nome_text.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jPanel1.add(nome_text);
-        nome_text.setBounds(610, 100, 150, 30);
+        jButton1.setBounds(210, 80, 50, 30);
 
         limpar_BTN.setText("Limpar");
         jPanel1.add(limpar_BTN);
-        limpar_BTN.setBounds(330, 70, 130, 32);
+        limpar_BTN.setBounds(740, 80, 130, 32);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fundo2.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, -10, 880, 510);
+        editar_BTN.setBackground(new java.awt.Color(37, 36, 36));
+        editar_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/editar (1).png"))); // NOI18N
+        jPanel1.add(editar_BTN);
+        editar_BTN.setBounds(780, 140, 60, 40);
+        jPanel1.add(cli_cpf_txt);
+        cli_cpf_txt.setBounds(520, 140, 170, 40);
+        jPanel1.add(cli_nome_txt);
+        cli_nome_txt.setBounds(530, 80, 170, 40);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 880, 530);
+        jPanel1.setBounds(0, 0, 880, 510);
 
         barrinha.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -336,10 +411,11 @@ public class Vendas_GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JMenuBar barrinha;
-    private javax.swing.JLabel cpf_text;
-    private javax.swing.JTextField id_compra_txt;
+    public static javax.swing.JLabel cli_cpf_txt;
+    public static javax.swing.JLabel cli_nome_txt;
+    private javax.swing.JButton editar_BTN;
+    public static javax.swing.JTextField id_compra_txt;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -357,12 +433,11 @@ public class Vendas_GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton limpar_BTN;
-    private javax.swing.JLabel nome_text;
     private javax.swing.JLabel preco_text;
     private javax.swing.JLabel produto_text;
     private javax.swing.JLabel quant_text;
-    private javax.swing.JTextField valortl_txt;
+    public static javax.swing.JTextField valortl_txt;
+    private javax.swing.JTable vendas_table;
     // End of variables declaration//GEN-END:variables
 }
