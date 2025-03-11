@@ -126,7 +126,7 @@ public class Produtos_GUI extends javax.swing.JFrame {
         editar_BTN = new javax.swing.JButton();
         excluir_BTN = new javax.swing.JButton();
         add_BTN = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         barrinha = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -146,10 +146,10 @@ public class Produtos_GUI extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Preço:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(480, 60, 60, 20);
+        jLabel2.setBounds(480, 80, 60, 20);
 
         preco_txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,11 +157,11 @@ public class Produtos_GUI extends javax.swing.JFrame {
             }
         });
         jPanel1.add(preco_txt);
-        preco_txt.setBounds(540, 60, 80, 24);
+        preco_txt.setBounds(540, 80, 80, 24);
 
         jLabel3.setBackground(new java.awt.Color(103, 103, 103));
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Para adicionar um novo produto");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(240, 130, 250, 40);
@@ -175,10 +175,10 @@ public class Produtos_GUI extends javax.swing.JFrame {
         tipo_txt.setBounds(90, 160, 100, 24);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Nome:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(230, 60, 60, 20);
+        jLabel4.setBounds(230, 80, 60, 20);
 
         nomepro_txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,24 +186,24 @@ public class Produtos_GUI extends javax.swing.JFrame {
             }
         });
         jPanel1.add(nomepro_txt);
-        nomepro_txt.setBounds(280, 60, 150, 24);
+        nomepro_txt.setBounds(280, 80, 150, 24);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Id Produto:  ");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(20, 60, 100, 20);
+        jLabel5.setBounds(20, 80, 100, 20);
         jPanel1.add(id_txt);
-        id_txt.setBounds(110, 60, 90, 24);
+        id_txt.setBounds(110, 80, 90, 24);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Tipo:");
         jPanel1.add(jLabel6);
         jLabel6.setBounds(40, 160, 100, 20);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("não é necesssário inserir um id!");
         jPanel1.add(jLabel7);
         jLabel7.setBounds(240, 150, 260, 40);
@@ -230,7 +230,7 @@ public class Produtos_GUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(produtos_table);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(0, 240, 880, 270);
+        jScrollPane1.setBounds(0, 240, 880, 260);
 
         limpar_BTN.setBackground(new java.awt.Color(255, 255, 51));
         limpar_BTN.setForeground(new java.awt.Color(0, 0, 0));
@@ -241,7 +241,7 @@ public class Produtos_GUI extends javax.swing.JFrame {
             }
         });
         jPanel1.add(limpar_BTN);
-        limpar_BTN.setBounds(720, 60, 110, 40);
+        limpar_BTN.setBounds(720, 70, 110, 40);
 
         buscar_BTN.setBackground(new java.awt.Color(37, 36, 36));
         buscar_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa (1).png"))); // NOI18N
@@ -283,9 +283,11 @@ public class Produtos_GUI extends javax.swing.JFrame {
         jPanel1.add(add_BTN);
         add_BTN.setBounds(520, 160, 54, 50);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pri_fundo.png"))); // NOI18N
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 880, 480);
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Produtos");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(350, 0, 180, 70);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 890, 510);
@@ -571,13 +573,13 @@ public class Produtos_GUI extends javax.swing.JFrame {
     private javax.swing.JButton editar_BTN;
     private javax.swing.JButton excluir_BTN;
     public static javax.swing.JTextField id_txt;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

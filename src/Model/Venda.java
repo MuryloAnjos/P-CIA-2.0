@@ -11,6 +11,7 @@ public class Venda {
     private double valor_total;
     private double troco;
     private String cli_cpf;
+    private String status;
 
     public int getId() {
         return id;
@@ -60,9 +61,15 @@ public class Venda {
         this.cli_cpf = cli_cpf;
     }
     
-    public void abrir_venda(){
-        
+    public String getStatus() {
+        return status;
     }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+  
     
     
 }

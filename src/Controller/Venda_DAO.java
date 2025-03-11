@@ -10,7 +10,7 @@ import static View.Caixa_GUI.item_table;
 import static View.Caixa_GUI.nomepdt_txt1;
 import static View.Caixa_GUI.preco_txt;
 import static View.Vendas_GUI.cli_cpf_txt;
-import static View.Vendas_GUI.valortl_txt;
+import static View.Vendas_GUI.status_txt;
 
 import static View.ddscliente_GUI.cli_cpf;
 import static View.ddscliente_GUI.cli_nome;
@@ -110,7 +110,6 @@ public class Venda_DAO {
             stmt.setInt(3, iv.getQuantidade());
 
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Item Adicionado");
                                                  
         } catch (SQLException ex) {
             Logger.getLogger(Venda_DAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -209,8 +208,8 @@ public class Venda_DAO {
                 Venda ven = new Venda();
                 ven.setId(rs.getInt("ven_id"));
                 ven.setData(rs.getTimestamp("ven_data").toLocalDateTime());
-                ven.setMet_pagamento(rs.getString("ven_met_pagamento"));
                 ven.setValor_total(rs.getDouble("ven_valor_total"));
+                ven.setStatus(rs.getString("ven_status"));
                 vendas.add(ven);
             }
             
@@ -244,7 +243,7 @@ public class Venda_DAO {
             }
 
             cli_cpf_txt.setText(cli_cpf);
-            valortl_txt.setText(String.valueOf(valor_total));
+            status_txt.setText(String.valueOf(valor_total));
 
 
         } catch (SQLException ex) {
@@ -262,13 +261,13 @@ public class Venda_DAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE vendas SET ven_valor_total = ? WHERE ven_id = ?");
+            stmt = con.prepareStatement("UPDATE vendas SET ven_valor_total = ?, ven_status = ? WHERE ven_id = ?");
             stmt.setDouble(1, v.getValor_total());
-            stmt.setInt(2, v.getId());
+            stmt.setString(2, v.getStatus());
+            stmt.setInt(3, v.getId());
 
 
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Venda Pá");
         } catch (SQLException ex) {
             Logger.getLogger(Venda_DAO.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao Atualizar" + ex);

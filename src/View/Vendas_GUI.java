@@ -98,8 +98,9 @@ public class Vendas_GUI extends javax.swing.JFrame {
             modelo.addRow(new Object[]{
                 v.getId(),
                 v.getData(),
-                v.getMet_pagamento(),
-                v.getValor_total()
+                v.getValor_total(),
+                v.getStatus()
+                
             });
 
         }
@@ -117,18 +118,19 @@ public class Vendas_GUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        valortl_txt = new javax.swing.JTextField();
+        status_txt = new javax.swing.JTextField();
         id_compra_txt = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         vendas_table = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         quant_text = new javax.swing.JLabel();
-        preco_text = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         limpar_BTN = new javax.swing.JButton();
         editar_BTN = new javax.swing.JButton();
         cli_cpf_txt = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        valortl_txt = new javax.swing.JTextField();
         barrinha = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -149,17 +151,17 @@ public class Vendas_GUI extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Valor Total :");
+        jLabel5.setText("Status :");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(310, 100, 90, 30);
+        jLabel5.setBounds(490, 100, 60, 30);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("VENDAS");
+        jLabel3.setText("Vendas");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(370, 10, 170, 40);
-        jPanel1.add(valortl_txt);
-        valortl_txt.setBounds(400, 100, 120, 30);
+        jPanel1.add(status_txt);
+        status_txt.setBounds(550, 100, 120, 30);
 
         id_compra_txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,13 +169,13 @@ public class Vendas_GUI extends javax.swing.JFrame {
             }
         });
         jPanel1.add(id_compra_txt);
-        id_compra_txt.setBounds(130, 100, 60, 30);
+        id_compra_txt.setBounds(100, 100, 60, 30);
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Cpf do Cliente :");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(560, 100, 110, 30);
+        jLabel8.setBounds(200, 160, 110, 30);
 
         vendas_table.setBackground(new java.awt.Color(103, 103, 103));
         vendas_table.setForeground(new java.awt.Color(255, 255, 255));
@@ -185,11 +187,11 @@ public class Vendas_GUI extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Id_Venda", "Data", "Método_Pagamento", "Valor_Total"
+                "Id_Venda", "Data", "Valor_Total", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -210,11 +212,9 @@ public class Vendas_GUI extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("ID_Venda :");
         jPanel1.add(jLabel12);
-        jLabel12.setBounds(40, 90, 100, 50);
+        jLabel12.setBounds(20, 90, 80, 50);
         jPanel1.add(quant_text);
         quant_text.setBounds(160, 220, 140, 30);
-        jPanel1.add(preco_text);
-        preco_text.setBounds(140, 180, 140, 30);
 
         jButton1.setBackground(new java.awt.Color(37, 36, 36));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa (1).png"))); // NOI18N
@@ -224,7 +224,7 @@ public class Vendas_GUI extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(210, 100, 50, 30);
+        jButton1.setBounds(170, 100, 50, 30);
 
         limpar_BTN.setBackground(new java.awt.Color(37, 36, 36));
         limpar_BTN.setForeground(new java.awt.Color(255, 255, 255));
@@ -235,7 +235,7 @@ public class Vendas_GUI extends javax.swing.JFrame {
             }
         });
         jPanel1.add(limpar_BTN);
-        limpar_BTN.setBounds(510, 180, 130, 32);
+        limpar_BTN.setBounds(710, 100, 130, 32);
 
         editar_BTN.setBackground(new java.awt.Color(37, 36, 36));
         editar_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/editar (1).png"))); // NOI18N
@@ -245,9 +245,23 @@ public class Vendas_GUI extends javax.swing.JFrame {
             }
         });
         jPanel1.add(editar_BTN);
-        editar_BTN.setBounds(290, 180, 60, 40);
+        editar_BTN.setBounds(740, 160, 60, 40);
         jPanel1.add(cli_cpf_txt);
-        cli_cpf_txt.setBounds(680, 100, 170, 30);
+        cli_cpf_txt.setBounds(320, 160, 170, 30);
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Valor Total :");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(260, 100, 90, 30);
+
+        valortl_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                valortl_txtActionPerformed(evt);
+            }
+        });
+        jPanel1.add(valortl_txt);
+        valortl_txt.setBounds(350, 100, 120, 30);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 880, 510);
@@ -364,13 +378,13 @@ public class Vendas_GUI extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
         new Produtos_GUI().setVisible(true);
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
         new Caixa_GUI().setVisible(true);
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
@@ -379,6 +393,7 @@ public class Vendas_GUI extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         new Vendas_GUI().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
@@ -408,7 +423,8 @@ public class Vendas_GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (vendas_table.getSelectedRow() != -1) {
             id_compra_txt.setText(vendas_table.getValueAt(vendas_table.getSelectedRow(), 0).toString());
-            valortl_txt.setText(vendas_table.getValueAt(vendas_table.getSelectedRow(), 3).toString());
+            valortl_txt.setText(vendas_table.getValueAt(vendas_table.getSelectedRow(), 2).toString());
+            status_txt.setText(vendas_table.getValueAt(vendas_table.getSelectedRow(), 3).toString());
 
         }
     }//GEN-LAST:event_vendas_tableMouseClicked
@@ -429,9 +445,9 @@ public class Vendas_GUI extends javax.swing.JFrame {
 
     private void limpar_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpar_BTNActionPerformed
         // TODO add your handling code here:
-        
-        id_compra_txt.setText("");
         valortl_txt.setText("");
+        id_compra_txt.setText("");
+        status_txt.setText("");
         cli_cpf_txt.setText("");
     }//GEN-LAST:event_limpar_BTNActionPerformed
 
@@ -441,14 +457,19 @@ public class Vendas_GUI extends javax.swing.JFrame {
         Venda c = new Venda();
         Venda_DAO dao = new Venda_DAO();
         c.setValor_total(Double.parseDouble(valortl_txt.getText()));
-        c.setId(Integer.parseInt(id_compra_txt.getText()));
+        c.setStatus(status_txt.getText());
         dao.update(c);
         readJTable();
         id_compra_txt.setText("");
-        valortl_txt.setText("");
+        status_txt.setText("");
         cli_cpf_txt.setText("");
+        valortl_txt.setText("");
         
     }//GEN-LAST:event_editar_BTNActionPerformed
+
+    private void valortl_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valortl_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_valortl_txtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -494,6 +515,7 @@ public class Vendas_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -508,8 +530,8 @@ public class Vendas_GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpar_BTN;
-    private javax.swing.JLabel preco_text;
     private javax.swing.JLabel quant_text;
+    public static javax.swing.JTextField status_txt;
     public static javax.swing.JTextField valortl_txt;
     private javax.swing.JTable vendas_table;
     // End of variables declaration//GEN-END:variables

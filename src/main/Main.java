@@ -5,6 +5,7 @@
  */
 package main;
 
+import View.Inicio_GUI;
 import View.Login_GUI;
 
 /**
@@ -17,7 +18,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-                new Login_GUI().setVisible(true);
+         new Inicio_GUI().setVisible(true);
     }
     
 }

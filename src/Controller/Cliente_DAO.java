@@ -27,7 +27,6 @@ public class Cliente_DAO {
             stmt.setString(3, f.getTel());
                         
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Cliente Pumba");
         
         } catch (SQLException ex) {
             Logger.getLogger(Cliente_DAO.class.getName()).log(Level.SEVERE, null, ex);

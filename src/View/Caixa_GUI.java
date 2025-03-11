@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.Caixa_DAO;
 import Controller.Venda_DAO;
 import Model.Item_Venda;
 import Model.Produto;
@@ -106,7 +107,6 @@ public class Caixa_GUI extends javax.swing.JFrame {
         preco_txt = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         cpf_text = new javax.swing.JLabel();
         nome_text = new javax.swing.JLabel();
@@ -128,6 +128,7 @@ public class Caixa_GUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         buscar_txt7 = new javax.swing.JTextField();
         editar_BTN1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         barrinha = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -163,35 +164,45 @@ public class Caixa_GUI extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(70, 250, 100, 30);
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Dados da Venda :");
-        jPanel1.add(jLabel6);
-        jLabel6.setBounds(70, 20, 150, 40);
-
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Valor Total:");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(270, 420, 120, 50);
+        jLabel9.setBounds(320, 430, 120, 50);
         jPanel1.add(cpf_text);
         cpf_text.setBounds(580, 150, 160, 30);
         jPanel1.add(nome_text);
         nome_text.setBounds(580, 110, 160, 30);
+
+        valortl_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                valortl_txtActionPerformed(evt);
+            }
+        });
         jPanel1.add(valortl_txt);
-        valortl_txt.setBounds(360, 430, 80, 30);
+        valortl_txt.setBounds(420, 440, 80, 30);
 
         finalizar_BTN.setBackground(new java.awt.Color(255, 255, 51));
         finalizar_BTN.setForeground(new java.awt.Color(0, 0, 0));
         finalizar_BTN.setText("FINALIZAR");
+        finalizar_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finalizar_BTNActionPerformed(evt);
+            }
+        });
         jPanel1.add(finalizar_BTN);
-        finalizar_BTN.setBounds(640, 430, 160, 40);
+        finalizar_BTN.setBounds(620, 440, 160, 40);
 
         totalizar_BTN.setBackground(new java.awt.Color(255, 255, 51));
         totalizar_BTN.setForeground(new java.awt.Color(0, 0, 0));
         totalizar_BTN.setText("Totalizar");
+        totalizar_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalizar_BTNActionPerformed(evt);
+            }
+        });
         jPanel1.add(totalizar_BTN);
-        totalizar_BTN.setBounds(40, 430, 160, 40);
+        totalizar_BTN.setBounds(90, 430, 160, 40);
 
         jScrollPane1.setBackground(new java.awt.Color(103, 103, 103));
         jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
@@ -215,7 +226,7 @@ public class Caixa_GUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(item_table);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(0, 300, 880, 230);
+        jScrollPane1.setBounds(0, 300, 880, 110);
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
@@ -302,6 +313,12 @@ public class Caixa_GUI extends javax.swing.JFrame {
         });
         jPanel1.add(editar_BTN1);
         editar_BTN1.setBounds(570, 210, 60, 50);
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Caixa");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(370, 0, 140, 70);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 880, 500);
@@ -419,13 +436,13 @@ public class Caixa_GUI extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
         new Produtos_GUI().setVisible(true);
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
         new Caixa_GUI().setVisible(true);
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
@@ -434,6 +451,7 @@ public class Caixa_GUI extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         new Vendas_GUI().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
@@ -502,11 +520,43 @@ public class Caixa_GUI extends javax.swing.JFrame {
         buscar_txt6.setText("");
         buscar_txt7.setText("");
         Id_venda_txt.setText("");
+        valortl_txt.setText("");
+        DefaultTableModel modelo = (DefaultTableModel) item_table.getModel();
+        modelo.setRowCount(0);
     }//GEN-LAST:event_limpar_BTN1ActionPerformed
 
     private void editar_BTN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_BTN1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_editar_BTN1ActionPerformed
+
+    private void totalizar_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalizar_BTNActionPerformed
+        // TODO add your handling code here:
+        Caixa_DAO.totalizar();
+    }//GEN-LAST:event_totalizar_BTNActionPerformed
+
+    private void finalizar_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizar_BTNActionPerformed
+        // TODO add your handling code here:
+        Venda v = new Venda();
+//        Caixa rel = new Caixa();
+        Venda_DAO dao = new Venda_DAO();
+        Caixa_DAO cx = new Caixa_DAO();
+        v.setValor_total(Double.parseDouble(valortl_txt.getText()));
+        v.setStatus("fechada");
+        v.setId(Integer.parseInt(Id_venda_txt.getText()));
+//        rel.taxa(c);
+        cx.fecharComanda(v);
+        readJTable();
+        
+        nomepdt_txt1.setText("");
+        preco_txt.setText("");
+        buscar_txt6.setText("");
+        buscar_txt7.setText("");
+        Id_venda_txt.setText("");
+    }//GEN-LAST:event_finalizar_BTNActionPerformed
+
+    private void valortl_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valortl_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_valortl_txtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -557,10 +607,10 @@ public class Caixa_GUI extends javax.swing.JFrame {
     public static javax.swing.JTable item_table;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -580,6 +630,6 @@ public class Caixa_GUI extends javax.swing.JFrame {
     public static javax.swing.JLabel nomepdt_txt1;
     public static javax.swing.JLabel preco_txt;
     private javax.swing.JButton totalizar_BTN;
-    private javax.swing.JTextField valortl_txt;
+    public static javax.swing.JTextField valortl_txt;
     // End of variables declaration//GEN-END:variables
 }
