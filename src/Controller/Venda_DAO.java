@@ -9,6 +9,8 @@ import static View.Caixa_GUI.Id_venda_txt;
 import static View.Caixa_GUI.item_table;
 import static View.Caixa_GUI.nomepdt_txt1;
 import static View.Caixa_GUI.preco_txt;
+import static View.Vendas_GUI.cli_cpf_txt;
+import static View.Vendas_GUI.valortl_txt;
 
 import static View.ddscliente_GUI.cli_cpf;
 import static View.ddscliente_GUI.cli_nome;
@@ -220,4 +222,61 @@ public class Venda_DAO {
         return vendas;
         
     }
+    
+    
+    public void consul(Venda v) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.prepareStatement("SELECT cli_cpf, ven_valor_total FROM vendas WHERE ven_id = ?");
+            stmt.setInt(1, v.getId());
+            rs = stmt.executeQuery();
+
+            String cli_cpf = "";
+            double valor_total = 0;
+
+
+            while (rs.next()) {
+                cli_cpf = (rs.getString("cli_cpf"));
+                valor_total = (rs.getDouble("ven_valor_total"));
+            }
+
+            cli_cpf_txt.setText(cli_cpf);
+            valortl_txt.setText(String.valueOf(valor_total));
+
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Venda_DAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
+    }
+    
+    
+    public void update(Venda v) {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("UPDATE vendas SET ven_valor_total = ? WHERE ven_id = ?");
+            stmt.setDouble(1, v.getValor_total());
+            stmt.setInt(2, v.getId());
+
+
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Venda Pá");
+        } catch (SQLException ex) {
+            Logger.getLogger(Venda_DAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao Atualizar" + ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+
+    }
+
+
 }

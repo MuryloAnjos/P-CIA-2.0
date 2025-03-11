@@ -7,6 +7,10 @@ package View;
 
 import Controller.Venda_DAO;
 import Model.Venda;
+import static View.Produtos_GUI.id_txt;
+import static View.Produtos_GUI.nomepro_txt;
+import static View.Produtos_GUI.preco_txt;
+import static View.Produtos_GUI.tipo_txt;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -26,7 +30,7 @@ import javax.swing.table.TableRowSorter;
  * @author Kaua
  */
 public class Vendas_GUI extends javax.swing.JFrame {
-    
+
     private void customizeMenuBar(JMenuBar menuBar) {
 
         menuBar.setUI(new BasicMenuBarUI() {
@@ -71,6 +75,7 @@ public class Vendas_GUI extends javax.swing.JFrame {
         comp.setBackground(Color.black);
         comp.setForeground(Color.white);
     }
+
     /**
      * Creates new form Vendas_GUI
      */
@@ -84,7 +89,7 @@ public class Vendas_GUI extends javax.swing.JFrame {
 
     }
 
-     public void readJTable() {
+    public void readJTable() {
         DefaultTableModel modelo = (DefaultTableModel) vendas_table.getModel();
         Venda_DAO ven = new Venda_DAO();
 
@@ -96,9 +101,10 @@ public class Vendas_GUI extends javax.swing.JFrame {
                 v.getMet_pagamento(),
                 v.getValor_total()
             });
-           
+
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -113,19 +119,16 @@ public class Vendas_GUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         valortl_txt = new javax.swing.JTextField();
         id_compra_txt = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         vendas_table = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         quant_text = new javax.swing.JLabel();
-        produto_text = new javax.swing.JLabel();
         preco_text = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         limpar_BTN = new javax.swing.JButton();
         editar_BTN = new javax.swing.JButton();
         cli_cpf_txt = new javax.swing.JLabel();
-        cli_nome_txt = new javax.swing.JLabel();
         barrinha = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -148,29 +151,29 @@ public class Vendas_GUI extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Valor Total :");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(50, 150, 90, 30);
+        jLabel5.setBounds(310, 100, 90, 30);
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Dados do Cliente:");
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("VENDAS");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(580, 10, 160, 40);
+        jLabel3.setBounds(370, 10, 170, 40);
         jPanel1.add(valortl_txt);
-        valortl_txt.setBounds(160, 150, 110, 30);
-        jPanel1.add(id_compra_txt);
-        id_compra_txt.setBounds(140, 80, 60, 30);
+        valortl_txt.setBounds(400, 100, 120, 30);
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Nome :");
-        jPanel1.add(jLabel7);
-        jLabel7.setBounds(470, 80, 50, 40);
+        id_compra_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                id_compra_txtActionPerformed(evt);
+            }
+        });
+        jPanel1.add(id_compra_txt);
+        id_compra_txt.setBounds(130, 100, 60, 30);
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("CPF :");
+        jLabel8.setText("Cpf do Cliente :");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(470, 140, 40, 40);
+        jLabel8.setBounds(560, 100, 110, 30);
 
         vendas_table.setBackground(new java.awt.Color(103, 103, 103));
         vendas_table.setForeground(new java.awt.Color(255, 255, 255));
@@ -184,7 +187,20 @@ public class Vendas_GUI extends javax.swing.JFrame {
             new String [] {
                 "Id_Venda", "Data", "Método_Pagamento", "Valor_Total"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        vendas_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vendas_tableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(vendas_table);
 
         jPanel1.add(jScrollPane1);
@@ -192,32 +208,46 @@ public class Vendas_GUI extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel12.setText("ID_Compra :");
+        jLabel12.setText("ID_Venda :");
         jPanel1.add(jLabel12);
-        jLabel12.setBounds(50, 70, 100, 50);
+        jLabel12.setBounds(40, 90, 100, 50);
         jPanel1.add(quant_text);
         quant_text.setBounds(160, 220, 140, 30);
-        jPanel1.add(produto_text);
-        produto_text.setBounds(150, 140, 130, 30);
         jPanel1.add(preco_text);
         preco_text.setBounds(140, 180, 140, 30);
 
+        jButton1.setBackground(new java.awt.Color(37, 36, 36));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa (1).png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1);
-        jButton1.setBounds(210, 80, 50, 30);
+        jButton1.setBounds(210, 100, 50, 30);
 
+        limpar_BTN.setBackground(new java.awt.Color(37, 36, 36));
+        limpar_BTN.setForeground(new java.awt.Color(255, 255, 255));
         limpar_BTN.setText("Limpar");
+        limpar_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpar_BTNActionPerformed(evt);
+            }
+        });
         jPanel1.add(limpar_BTN);
-        limpar_BTN.setBounds(740, 80, 130, 32);
+        limpar_BTN.setBounds(510, 180, 130, 32);
 
         editar_BTN.setBackground(new java.awt.Color(37, 36, 36));
         editar_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/editar (1).png"))); // NOI18N
+        editar_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editar_BTNActionPerformed(evt);
+            }
+        });
         jPanel1.add(editar_BTN);
-        editar_BTN.setBounds(780, 140, 60, 40);
+        editar_BTN.setBounds(290, 180, 60, 40);
         jPanel1.add(cli_cpf_txt);
-        cli_cpf_txt.setBounds(520, 140, 170, 40);
-        jPanel1.add(cli_nome_txt);
-        cli_nome_txt.setBounds(530, 80, 170, 40);
+        cli_cpf_txt.setBounds(680, 100, 170, 30);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 880, 510);
@@ -358,13 +388,13 @@ public class Vendas_GUI extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
 
-        String x =  JOptionPane.showInputDialog(null, "Deseja realmente fechar ?"
-            + " \n1 - Sim"
-            + " \n2 - Não "
+        String x = JOptionPane.showInputDialog(null, "Deseja realmente fechar ?"
+                + " \n1 - Sim"
+                + " \n2 - Não "
         );
         int op = Integer.parseInt(x);
 
-        if(op == 1){
+        if (op == 1) {
             System.exit(0);
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -373,6 +403,51 @@ public class Vendas_GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jMenu8ActionPerformed
+
+    private void vendas_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vendas_tableMouseClicked
+        // TODO add your handling code here:
+        if (vendas_table.getSelectedRow() != -1) {
+            id_compra_txt.setText(vendas_table.getValueAt(vendas_table.getSelectedRow(), 0).toString());
+            valortl_txt.setText(vendas_table.getValueAt(vendas_table.getSelectedRow(), 3).toString());
+
+        }
+    }//GEN-LAST:event_vendas_tableMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Venda v = new Venda();
+        Venda_DAO dao = new Venda_DAO();
+        v.setId(Integer.parseInt(id_compra_txt.getText()));
+        dao.consul(v);
+        readJTable();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void id_compra_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_compra_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_id_compra_txtActionPerformed
+
+    private void limpar_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpar_BTNActionPerformed
+        // TODO add your handling code here:
+        
+        id_compra_txt.setText("");
+        valortl_txt.setText("");
+        cli_cpf_txt.setText("");
+    }//GEN-LAST:event_limpar_BTNActionPerformed
+
+    private void editar_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_BTNActionPerformed
+        // TODO add your handling code here:
+        
+        Venda c = new Venda();
+        Venda_DAO dao = new Venda_DAO();
+        c.setValor_total(Double.parseDouble(valortl_txt.getText()));
+        c.setId(Integer.parseInt(id_compra_txt.getText()));
+        dao.update(c);
+        readJTable();
+        id_compra_txt.setText("");
+        valortl_txt.setText("");
+        
+    }//GEN-LAST:event_editar_BTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -412,14 +487,12 @@ public class Vendas_GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JMenuBar barrinha;
     public static javax.swing.JLabel cli_cpf_txt;
-    public static javax.swing.JLabel cli_nome_txt;
     private javax.swing.JButton editar_BTN;
     public static javax.swing.JTextField id_compra_txt;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -435,7 +508,6 @@ public class Vendas_GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpar_BTN;
     private javax.swing.JLabel preco_text;
-    private javax.swing.JLabel produto_text;
     private javax.swing.JLabel quant_text;
     public static javax.swing.JTextField valortl_txt;
     private javax.swing.JTable vendas_table;
