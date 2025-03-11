@@ -446,6 +446,7 @@ public class Vendas_GUI extends javax.swing.JFrame {
         readJTable();
         id_compra_txt.setText("");
         valortl_txt.setText("");
+        cli_cpf_txt.setText("");
         
     }//GEN-LAST:event_editar_BTNActionPerformed
 

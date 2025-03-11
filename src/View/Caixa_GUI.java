@@ -198,6 +198,7 @@ public class Caixa_GUI extends javax.swing.JFrame {
 
         item_table.setAutoCreateRowSorter(true);
         item_table.setBackground(new java.awt.Color(103, 103, 103));
+        item_table.setForeground(new java.awt.Color(255, 255, 255));
         item_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -468,10 +469,9 @@ public class Caixa_GUI extends javax.swing.JFrame {
 //        p.setTipo(tipopdt_cmb.getSelectedItem().toString().toLowerCase());
         dao.inserir_item(v);
         readJTable();
-        Id_venda_txt.setText("");
         nomepdt_txt1.setText("");
         preco_txt.setText("");
-        buscar_txt7.setText("");
+        buscar_txt6.setText("");
         buscar_txt7.setText("");
         
 
@@ -497,6 +497,11 @@ public class Caixa_GUI extends javax.swing.JFrame {
 
     private void limpar_BTN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpar_BTN1ActionPerformed
         // TODO add your handling code here:
+        nomepdt_txt1.setText("");
+        preco_txt.setText("");
+        buscar_txt6.setText("");
+        buscar_txt7.setText("");
+        Id_venda_txt.setText("");
     }//GEN-LAST:event_limpar_BTN1ActionPerformed
 
     private void editar_BTN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_BTN1ActionPerformed
